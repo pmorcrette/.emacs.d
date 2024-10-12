@@ -66,6 +66,21 @@
       :hook
 (dired-mode . all-the-icons-dired-mode))
 
+;; let's add some meow to Emacs
+
+(use-package catppuccin-theme
+  :init
+  (load-theme 'catppuccin :no-confirm)
+  :config
+  (setq catppuccin-flavor 'macchiato)
+  (catppuccin-reload)f)
+
+;; And some cool modeline !
+
+(use-package telephone-line
+  :init
+  (telephone-line-mode 1))
+
 (use-package general)
 (use-package marginalia
         :general
