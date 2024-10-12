@@ -1,0 +1,7 @@
+* Installation
+
+Remove your old emacs config and git clone this one in place and you should be good to go.
+
+#+begin_src sh
+  git clone https://github.com/pmorcrette/.emacs.d.git ∼/.emacs.d
+#+end_src
