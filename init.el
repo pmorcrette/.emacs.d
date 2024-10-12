@@ -265,3 +265,13 @@ consult-ripgrep consult-git-grep consult-grep
 		 (require 'lsp-pyright)
 		 (lsp-deferred)))) ; or lsp-deferred
 
+;; Json without braces
+
+(use-package yaml-mode)
+
+(use-package highlight-indentation)
+
+(add-hook 'yaml-mode-hook
+	  (lambda ()
+	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)
+	    (highlight-indentation-mode)))
