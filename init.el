@@ -38,6 +38,24 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
+;; Straight.el bootstrap
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name
+        "straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
 ;; here goes packages
 (use-package all-the-icons
       :if
@@ -150,7 +168,7 @@ consult-ripgrep consult-git-grep consult-grep
 	eshell-scroll-to-bottom-on-input t))
 
 (defalias 'ff 'find-file-other-window)
-s
+
 (defun esh(name)
   (interactive "sName: ")
   (eshell 'N)
