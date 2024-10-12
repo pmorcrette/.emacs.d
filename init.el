@@ -170,3 +170,55 @@ s
 (use-package rainbow-delimiters ;; it's for shit & giggles. Absolutely not to save my eyes some pain, I swear !
   :hook
   (prog-mode . rainbow-delimiters-mode))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; The heavy lifting is here                                          ;;
+;; Where we transform emacs as editor into a super duper powerful IDE ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package direnv
+        :config
+(direnv-mode))
+
+;; this is where we jury rig lsp with orderless, corfu, which-key and direnv 
+(use-package lsp-mode
+  :custom
+  (lsp-completion-provider :none)
+  :init
+  (defun my/lsp-mode-setup-completion
+      ()
+    (setf
+     (alist-get 'styles
+                (alist-get 'lsp-capf completion-category-defaults))
+     '(orderless)))
+  ;; Configure orderless
+  (advice-add 'lsp :before #'direnv-update-environment)
+  :hook
+  (lsp-completion-mode . my/lsp-mode-setup-completion)
+  (lsp-mode .
+            (lambda
+              ()
+              (let
+                  ((lsp-keymap-prefix "C-c l"))
+                (lsp-enable-which-key-integration))))
+  :config
+  (lsp-enable-which-key-integration t)
+  (define-key lsp-mode-map
+              (kbd "C-c l")
+              lsp-command-map))
+
+
+
+
+(use-package lsp-ui
+  :hook
+  (lsp-mode . lsp-ui-mode))
+
+;; This is the power of the outer gods at your fingertips
+(use-package yasnippet
+  :ensure t
+  :hook ((lsp-mode . yas-minor-mode)))
+
+;; And this is the outer gods 
+(use-package yasnippet-snippets)
+
+(electric-pair-mode t)
