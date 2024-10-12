@@ -157,3 +157,16 @@ s
   (if (not (= (length name) 0))
       (rename-buffer name)))
 
+
+;; Setting up GIT with a bit of magic
+(use-package magit) ;; <== MAGIC BE HERE !!!
+(use-package forge
+  :after magit)
+
+;; Some useful editor config
+(column-number-mode)
+(global-display-line-numbers-mode t)
+
+(use-package rainbow-delimiters ;; it's for shit & giggles. Absolutely not to save my eyes some pain, I swear !
+  :hook
+  (prog-mode . rainbow-delimiters-mode))
