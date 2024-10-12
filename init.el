@@ -138,3 +138,22 @@ consult-ripgrep consult-git-grep consult-grep
 	completion-category-defaults nil
 	completion-category-overrides nil))
 
+;; Some eshell stuff
+
+(use-package eshell-git-prompt)
+(use-package eshell
+  :config
+  (eshell-git-prompt-use-theme 'multiline2)
+  (setq eshell-history-size         10000
+	eshell-buffer-maximum-lines 10000
+	eshell-hist-ignoredups t
+	eshell-scroll-to-bottom-on-input t))
+
+(defalias 'ff 'find-file-other-window)
+s
+(defun esh(name)
+  (interactive "sName: ")
+  (eshell 'N)
+  (if (not (= (length name) 0))
+      (rename-buffer name)))
+
