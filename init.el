@@ -212,7 +212,7 @@ s
 (use-package lsp-ui
   :hook
   (lsp-mode . lsp-ui-mode))
-
+  
 ;; This is the power of the outer gods at your fingertips
 (use-package yasnippet
   :ensure t
@@ -222,3 +222,11 @@ s
 (use-package yasnippet-snippets)
 
 (electric-pair-mode t)
+
+;; Let's set things up for POSIX Shell scripting (all other shells are for the weak !)
+(use-package flymake) ;; we use flymake here for sh-script which run shellcheck for us
+(use-package sh-script
+  :hook (sh-mode . flymake-mode))
+(use-package shfmt
+  :hook
+  (sh-mode . shfmt-on-save-mode))
