@@ -73,7 +73,7 @@
   (load-theme 'catppuccin :no-confirm)
   :config
   (setq catppuccin-flavor 'macchiato)
-  (catppuccin-reload)f)
+  (catppuccin-reload))
 
 ;; And some cool modeline !
 
