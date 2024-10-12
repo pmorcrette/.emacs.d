@@ -1,0 +1,25 @@
+# -*- mode: snippet -*-
+# name:python boilerplate 
+# key: __boilerplate__
+# expand-env: ((yas-indent-line 'fixed) (yas-wrap-around-region 'nil))
+# --
+
+#!/usr/bin/env python3
+"""
+${1:Module Docstring}
+
+"""
+
+__author__ = "${2:`(user-full-name)`}"
+__version__ = "${3:0.1.0}"
+__license__ = "${4:MIT}"
+
+
+def main():
+    """ ${5:Main entry point of the app} """
+    $0print("hello world")
+
+
+if __name__ == "__main__":
+   """ ${6:This is executed when run from the command line} """
+   main()
