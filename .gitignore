@@ -1,5 +1,7 @@
 /*
+*.elc
 !.gitignore
 !init.el
 !README.org
 !/snippets/
+!/elpa

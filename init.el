@@ -278,7 +278,7 @@ consult-ripgrep consult-git-grep consult-grep
   (python-mode .
 	       (lambda ()
 		 (require 'lsp-pyright)
-		 (lsp-deferred)))) ; or lsp-deferred
+		 (lsp-deferred))))
 
 ;; Json without braces
 
