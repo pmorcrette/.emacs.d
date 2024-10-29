@@ -203,6 +203,21 @@ consult-ripgrep consult-git-grep consult-grep
 (use-package rainbow-delimiters ;; it's for shit & giggles. Absolutely not to save my eyes some pain, I swear !
   :hook
   (prog-mode . rainbow-delimiters-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Here be knowledge ! ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package org-roam
+  :init
+  (setq org-roam-directory (file-truename "~/.emacs.d/org"))
+  (org-roam-db-autosync-mode)
+  :general
+  ("C-c SPC" #'org-roam-capture))
+
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; The heavy lifting is here                                          ;;
 ;; Where we transform emacs as editor into a super duper powerful IDE ;;

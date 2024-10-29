@@ -1,6 +1,10 @@
+:PROPERTIES:
+:ID:       4b66d836-9d7a-41fc-a355-84ff3209dc55
+:END:
+#+title: writing_udev_rules
+
 This document is an automated conversion of the html file from https://www.reactivated.net/writing_udev_rules.html and is not official.
 Please refer to the original document for latest content.
-
 * Writing udev rules
   :PROPERTIES:
   :CUSTOM_ID: writing-udev-rules
