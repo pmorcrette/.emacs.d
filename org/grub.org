@@ -1,0 +1,22 @@
+grub2-setpassword
+
+grub2-mkconfig -o /boot/grub2/grub.cfg
+
+
+
+Exemple with a test password (the password being "test"):
+
+#+begin_src bash
+  grub-mkpasswd-pbkdf2
+
+  cat << EOF >> /etc/grub.d/40_custom
+
+  #Password
+
+  set superusers = "root"
+
+  password_pbkdf2 root grub.pbkdf2.sha512.10000.15FA11D0B0508F08BBFA9B9B181D47089F857E1A503C6E49594AB893D458D31FBC4BBA3A94D8F7518DD19BDEF96B4CDC40DEB123EB382725244E419C3ECAF3B9.25FE8364BA9018FD671BF8FCE6BB7B78C8E6515EB50D7437B5E0AEF7B414E6E34077E08FFD54A42F250DD8FD36BDF3B110D441A415914DD6D338977E1EC560BD
+  EOF
+
+  update-grub
+#+end_src
