@@ -42,13 +42,13 @@
 		 ("Jordon Biondo" . "jordonbiondo@gmail.com"))
 		(:commit . "33691c93ee302690e41f631f82083bcc15d229e8"))])
  (annotate .
-	   [(2 2 2)
+	   [(2 2 3)
 	    nil "annotate files without changing them" tar
 	    ((:url . "https://github.com/bastibe/annotate.el")
 	     (:maintainer
 	      ("Bastian Bechtold" . "bastibe.dev@mailbox.org")
 	      ("cage" . "cage-dev@twistfold.it"))
-	     (:commit . "deb43c7c429a021d16d6d67b82e7a3053a6eef67"))])
+	     (:commit . "4b0c353d43c64932b5506e150d6c82ef8d6e685b"))])
  (anti-zenburn-theme .
 		     [(2 5 1)
 		      nil "Low-contrast Zenburn-inverted theme" tar
@@ -541,7 +541,7 @@
 		(:keywords "languages" "elixir")
 		(:commit . "00d6580a040a750e019218f9392cf9a4c2dac23a"))])
  (elpher .
-	 [(3 6 3)
+	 [(3 6 4)
 	  ((emacs
 	    (27 1)))
 	  "A friendly gopher and gemini client" tar
@@ -550,7 +550,7 @@
 	   (:maintainer "Tim Vaughan" . "plugd@thelambdalab.xyz")
 	   (:authors
 	    ("Tim Vaughan" . "plugd@thelambdalab.xyz"))
-	   (:commit . "e3760dfedbd803dd8ff2a5d4fbbda249c1963bd1"))])
+	   (:commit . "a1c5fbf16b528fb67d087437d44d66e9edc99664"))])
  (emacsql .
 	  [(4 0 3)
 	   ((emacs
@@ -1032,7 +1032,7 @@
 	       ("Jonas Bernoulli" . "emacs.git-modes@jonas.bernoulli.dev"))
 	      (:commit . "f99010bbeb8b6d8a0819fac0195a2ef0159d08f0"))])
  (gnosis .
-	 [(0 4 5)
+	 [(0 4 6)
 	  ((emacs
 	    (27 2))
 	   (emacsql
@@ -1047,7 +1047,7 @@
 	   (:maintainer "Thanos Apollo" . "public@thanosapollo.org")
 	   (:authors
 	    ("Thanos Apollo" . "public@thanosapollo.org"))
-	   (:commit . "d7ec26a37ff9fa67794ce6206e67c2cced9e3fee"))])
+	   (:commit . "f4050f4f27e1ac0eab25168b0849017afd04aa31"))])
  (gnu-apl-mode .
 	       [(1 5 1)
 		nil "Emacs mode for GNU APL" tar
@@ -1118,7 +1118,7 @@
 	      ("David Andersson" . "l.david.anderssonsverige.nu"))
 	     (:commit . "278cd3e6d5107693aa2bb33189ca503f22f227d0"))])
  (gptel .
-	[(0 9 5)
+	[(0 9 6)
 	 ((emacs
 	   (27 1))
 	  (transient
@@ -1131,7 +1131,7 @@
 	  (:maintainer "Karthik Chikmagalur" . "karthik.chikmagalur@gmail.com")
 	  (:authors
 	   ("Karthik Chikmagalur" . "karthik.chikmagalur@gmail.com"))
-	  (:commit . "37ca1069326aefc54bdb1722fcac1e81f90b2ff3"))])
+	  (:commit . "f24e5ad4740ce5f9829b14e499c9181f9bd7c76e"))])
  (graphql-mode .
 	       [(1 0 0)
 		((emacs
@@ -1307,11 +1307,11 @@
 		("Joseph Turner" . "joseph@ushin.org"))
 	       (:commit . "6b70954da945664ca798bf483f1d60e9d5859409"))])
  (hyperdrive-org-transclusion .
-			      [(0 2)
+			      [(0 3 1)
 			       ((emacs
 				 (28 1))
 				(hyperdrive
-				 (0 4 1))
+				 (0 4 2))
 				(org-transclusion
 				 (1 4 0)))
 			       "Tranclude hyperdrive content" tar
@@ -1319,7 +1319,7 @@
 				(:maintainer "Joseph Turner" . "~ushin/ushin@lists.sr.ht")
 				(:authors
 				 ("Joseph Turner" . "joseph@ushin.org"))
-				(:commit . "3cfb18514c53a9ab7d421f8720cbf23b6ba8eb90"))])
+				(:commit . "25570c6e4b90dce0858b80b7f557db19744b3955"))])
  (idle-highlight-mode .
 		      [(1 1 4)
 		       ((emacs
@@ -1552,20 +1552,22 @@
 		   ("Jason R. Blevins" . "jblevins@xbeta.org"))
 		  (:commit . "193b61605f44c85d261b8bd82e0a213fd8f1ff32"))])
  (mastodon .
-	   [(1 0 27)
+	   [(1 1 0)
 	    ((emacs
 	      (27 1))
 	     (request
 	      (0 3 0))
 	     (persist
-	      (0 4)))
+	      (0 4))
+	     (tp
+	      (0 1)))
 	    "Client for fediverse services using the Mastodon API" tar
 	    ((:url . "https://codeberg.org/martianh/mastodon.el")
 	     (:maintainer "Marty Hiatt" . "martianhiatus@riseup.net")
 	     (:authors
 	      ("Johnson Denen" . "johnson.denen@gmail.com")
 	      ("Marty Hiatt" . "martianhiatus@riseup.net"))
-	     (:commit . "e593ad461ae275c641c6c4c90f67d62a920610a0"))])
+	     (:commit . "390c1d0c2dec6f247830cd507d8d1e8ca4db3479"))])
  (material-theme .
 		 [(2015)
 		  ((emacs
@@ -1597,13 +1599,13 @@
 	    ("Stefan Kangas" . "stefankangas@gmail.com"))
 	   (:commit . "480602f2ec5467aa2418ee98b328fb85d3b58d0c"))])
  (meow .
-       [(1 4 5)
+       [(1 5 0)
 	((emacs
 	  (27 1)))
 	"Yet Another modal editing" tar
 	((:url . "https://www.github.com/DogLooksGood/meow")
 	 (:keywords "convenience" "modal-editing")
-	 (:commit . "54d4e933039827c158a4f593a94681a64e0d8042"))])
+	 (:commit . "ebf7ebb5eb3ac7bb3cfaca9c32d9063f385aee9a"))])
  (minibar .
 	  [(0 3)
 	   ((emacs
@@ -2013,7 +2015,7 @@
 	       ("David Christiansen" . "david@davidchristiansen.dk"))
 	      (:commit . "1edda80e2e32b72e77f4f16ae5b83c312c68ee95"))])
  (racket-mode .
-	      [(1 0 20241001 105847)
+	      [(1 0 20241018 114543)
 	       ((emacs
 		 (25 1)))
 	       "Racket editing, REPL, and more" tar
@@ -2260,14 +2262,14 @@
 		     ("John Olsson" . "john@cryon.se"))
 		    (:commit . "2d5acd143a153e16372d59000e57d76291ab81dd"))])
  (subed .
-	[(1 2 16)
+	[(1 2 17)
 	 ((emacs
 	   (25 1)))
 	 "A major mode for editing subtitles" tar
 	 ((:url . "https://github.com/sachac/subed")
 	  (:keywords "convenience" "files" "hypermedia" "multimedia")
 	  (:maintainer "Sacha Chua" . "sacha@sachachua.com")
-	  (:commit . "4558c30f392e32a4658cfbcca335368035bf8da9"))])
+	  (:commit . "87222b0f5622308af6dd04fd09db6c12eddba082"))])
  (sweeprolog .
 	     [(0 27 6)
 	      ((emacs
@@ -2397,6 +2399,17 @@
 	      (:authors
 	       ("Vivek Das Mohapatra" . "vivek@etla.org"))
 	      (:commit . "v1.0"))])
+ (tp .
+     [(0 4)
+      ((emacs
+	(28 1)))
+      "Transient utilities for posting to an API" tar
+      ((:url . "https://codeberg.org/martianh/tp.el")
+       (:keywords "convenience" "api" "requests")
+       (:maintainer "Marty Hiatt" . "mousebot@disroot.org")
+       (:authors
+	("Marty Hiatt" . "mousebot@disroot.org"))
+       (:commit . "7de076a34cb75d445c13c4d08e5b3978946ee23b"))])
  (treeview .
 	   [(1 2 0)
 	    ((emacs
@@ -2602,14 +2615,14 @@
 	     ((:url . "https://github.com/lewang/ws-butler")
 	      (:commit . "323b651dd70ee40a25accc940b8f80c3a3185205"))])
  (xah-fly-keys .
-	       [(26 6 20241009212806)
+	       [(26 6 20241021131107)
 		((emacs
 		  (27)))
 		"ergonomic modal keybinding minor mode." tar
 		((:url . "http://xahlee.info/emacs/misc/xah-fly-keys.html")
 		 (:keywords "convenience" "vi" "vim" "ergoemacs" "keybinding")
 		 (:maintainer "Xah Lee" . "xah@xahlee.org")
-		 (:commit . "1ca81019cff66f04e83eeef74e7e475ffc21a5ed"))])
+		 (:commit . "3fb8453d4b4144e5105dd3e65c852be2e6770da8"))])
  (xkcd .
        [(1 1)
 	((json
