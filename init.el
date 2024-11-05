@@ -82,6 +82,7 @@
   (telephone-line-mode 1))
 
 (use-package general)
+
 (use-package marginalia
         :general
 (:keymaps 'minibuffer-local-map
@@ -146,9 +147,8 @@ consult-ripgrep consult-git-grep consult-grep
 (setq consult-narrow-key "<")
 :general
 ("M-y" #'consult-yank-from-kill-ring)
-("C-x b" #'consult-buffer)
-("C-x C-/" #'consult-find)
-("C-x M-/" #'consult-grep))
+("C-x b" #'consult-buffer))
+
 
 (use-package kind-icon
   :ensure t
@@ -213,7 +213,7 @@ consult-ripgrep consult-git-grep consult-grep
   (setq org-roam-directory (file-truename "~/.emacs.d/org"))
   (org-roam-db-autosync-mode)
   :general
-  ("C-c SPC" #'org-roam-capture))
+  ("M-SPC SPC" #'org-roam-capture))
 
 
 
@@ -314,3 +314,13 @@ consult-ripgrep consult-git-grep consult-grep
   (setq rustic-format-on-save nil)
   :custom
   (rustic-cargo-use-last-stored-arguments t))
+;; Some keybinds under my own prefix
+
+
+(general-create-definer my-leader-def 
+  :prefix "M-SPC"
+  :prefix-command 'my-leader-def)
+
+(my-leader-def
+ "f" 'consult-find
+ "g" 'consult-grep) 
