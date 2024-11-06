@@ -27,6 +27,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 
+
 ;; setup MELPA
 (require 'package)
 (setq package-archives
@@ -211,9 +212,7 @@ consult-ripgrep consult-git-grep consult-grep
 (use-package org-roam
   :init
   (setq org-roam-directory (file-truename "~/.emacs.d/org"))
-  (org-roam-db-autosync-mode)
-  :general
-  ("M-SPC SPC" #'org-roam-capture))
+  (org-roam-db-autosync-mode))
 
 
 
@@ -314,13 +313,14 @@ consult-ripgrep consult-git-grep consult-grep
   (setq rustic-format-on-save nil)
   :custom
   (rustic-cargo-use-last-stored-arguments t))
-;; Some keybinds under my own prefix
 
 
-(general-create-definer my-leader-def 
-  :prefix "M-SPC"
-  :prefix-command 'my-leader-def)
 
-(my-leader-def
- "f" 'consult-find
- "g" 'consult-grep) 
+;; Some keybinds under my own prefix to go faaaaasst
+(defvar-keymap quick-map)
+(define-key global-map (kbd "M-SPC") quick-map)
+(general-def quick-map
+  :keymaps quick-map
+  "f" 'consult-fd
+  "g" 'consult-ripgrep
+  "SPC" 'org-roam-capture)
