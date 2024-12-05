@@ -297,7 +297,6 @@ consult-ripgrep consult-git-grep consult-grep
 ;; Json without braces
 
 (use-package yaml-mode)
-
 (use-package highlight-indentation)
 
 (add-hook 'yaml-mode-hook
@@ -305,6 +304,11 @@ consult-ripgrep consult-git-grep consult-grep
 	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)
 	    (highlight-indentation-mode)))
 
+;; Ensure syntax coloration for yaml
+(add-hook 'yaml-mode-hook
+  (lambda ()
+    (face-remap-add-relative 'font-lock-variable-name-face
+                             (list :foreground (catppuccin-get-color 'blue)))))
 
 ;; Let's do some crabby things
 (use-package rustic
