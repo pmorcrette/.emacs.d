@@ -1,0 +1,3 @@
+[submodule "local-lisp"]
+	path = local-lisp
+	url = https://github.com/pmorcrette/local-lisp
