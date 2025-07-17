@@ -28,41 +28,20 @@
 
 
 
-;; setup MELPA
-(require 'package)
-(setq package-archives
-'(("melpa" . "https://melpa.org/packages/")
-("elpa" . "https://elpa.gnu.org/packages/")
-("nongnu" . "https://elpa.nongnu.org/nongnu/")))
 
 ;; Setup packaging system
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-;; Straight.el bootstrap
-
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name
-        "straight/repos/straight.el/bootstrap.el"
-        (or (bound-and-true-p straight-base-dir)
-            user-emacs-directory)))
-      (bootstrap-version 7))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
 
 ;; here goes packages
 (use-package all-the-icons
+  :load-path "~/.emacs.d/local-list/all-the-icons/"
       :if
 (display-graphic-p))
 
 (use-package all-the-icons-dired
+  :load-path "~/.emacs.d/local-list/all-the-icons-dired/"
       :after all-the-icons
       :hook
 (dired-mode . all-the-icons-dired-mode))
@@ -70,6 +49,7 @@
 ;; let's add some meow to Emacs
 
 (use-package catppuccin-theme
+  :load-path "~/.emacs.d/local-list/catppuccin-theme/"
   :init
   (load-theme 'catppuccin :no-confirm)
   :config
@@ -79,12 +59,15 @@
 ;; And some cool modeline !
 
 (use-package telephone-line
+  :load-path "~/.emacs.d/local-list/telephone-line"
   :init
   (telephone-line-mode 1))
 
-(use-package general)
+(use-package general
+  :load-path "~/.emacs.d/local-list/general")
 
 (use-package marginalia
+  :load-path "~/.emacs.d/local-list/marginalia"
         :general
 (:keymaps 'minibuffer-local-map
          "M-A" 'marginalia-cycle)
@@ -97,10 +80,12 @@
 (all-the-icons-completion-marginalia-setup))
 
 (use-package all-the-icons-completion
+  :load-path "~/.emacs.d/local-list/all-the-icons-completion"
   :after
   (marginalia all-the-icons))
 
 (use-package vertico
+  :load-path "~/.emacs.d/local-list/vertico"
   :config
 (vertico-reverse-mode)
 :init
@@ -108,11 +93,7 @@
 
 
 (use-package corfu
-  :straight
-  (corfu :files
-         (:defaults "extensions/*")
-         :includes
-         (corfu-info corfu-history corfu-popupinfo))
+  :load-path "~/.emacs.d/local-list/corfu"
   :custom
   (corfu-auto t)
   (corfu-auto-delay 0)
@@ -126,7 +107,8 @@
             "SPC" 'corfu-insert-separator))
 
 
-(use-package consult       
+(use-package consult
+  :load-path "~/.emacs.d/local-list/consult"
     :hook
 (completion-list-mode . consult-preview-at-point-mode)
 :init
@@ -152,6 +134,7 @@ consult-ripgrep consult-git-grep consult-grep
 
 
 (use-package kind-icon
+  :load-path "~/.emacs.d/local-list/kind-icon"
   :ensure t
   :after corfu
   :custom
@@ -166,6 +149,7 @@ consult-ripgrep consult-git-grep consult-grep
 :diminish which-key-mode)
 
 (use-package orderless
+  :load-path "~/.emacs.d/local-list/orderless"
   :init
   (setq completion-styles
 	'(orderless partial-completion basic)
@@ -174,8 +158,10 @@ consult-ripgrep consult-git-grep consult-grep
 
 ;; Some eshell stuff
 
-(use-package eshell-git-prompt)
+(use-package eshell-git-prompt
+  :load-path "~/.emacs.d/local-list/eshell-git-prompt")
 (use-package eshell
+  :load-path "~/.emacs.d/local-list/eshell"
   :config
   (eshell-git-prompt-use-theme 'multiline2)
   (setq eshell-history-size         10000
@@ -195,6 +181,7 @@ consult-ripgrep consult-git-grep consult-grep
 ;; Setting up GIT with a bit of magic
 (use-package magit) ;; <== MAGIC BE HERE !!!
 (use-package forge
+  :load-path "~/.emacs.d/local-list/forge"
   :after magit)
 
 ;; Some useful editor config
@@ -202,6 +189,7 @@ consult-ripgrep consult-git-grep consult-grep
 (global-display-line-numbers-mode t)
 
 (use-package rainbow-delimiters ;; it's for shit & giggles. Absolutely not to save my eyes some pain, I swear !
+  :load-path "~/.emacs.d/local-list/rainbow-delimiter"
   :hook
   (prog-mode . rainbow-delimiters-mode))
 
@@ -210,6 +198,7 @@ consult-ripgrep consult-git-grep consult-grep
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-roam
+  :load-path "~/.emacs.d/local-list/org-roam"
   :init
   (setq org-roam-directory (file-truename "~/.emacs.d/org"))
   (org-roam-db-autosync-mode))
@@ -228,6 +217,7 @@ consult-ripgrep consult-git-grep consult-grep
 
 ;; this is where we jury rig lsp with orderless, corfu, which-key and direnv 
 (use-package lsp-mode
+  :load-path "~/.emacs.d/local-list/lsp-mode"
   :custom
   (lsp-completion-provider :none)
   :init
@@ -257,16 +247,19 @@ consult-ripgrep consult-git-grep consult-grep
 
 
 (use-package lsp-ui
+  :load-path "~/.emacs.d/local-list/lsp-ui"
   :hook
   (lsp-mode . lsp-ui-mode))
   
 ;; This is the power of the outer gods at your fingertips
 (use-package yasnippet
+  :load-path "~/.emacs.d/local-list/yasnippet"
   :ensure t
   :hook ((lsp-mode . yas-minor-mode)))
 
 ;; And this is the outer gods 
-(use-package yasnippet-snippets)
+(use-package yasnippet-snippets
+  :load-path "~/.emacs.d/local-list/yasnippet-snippets")
 
 (electric-pair-mode t)
 
@@ -275,6 +268,7 @@ consult-ripgrep consult-git-grep consult-grep
 (use-package sh-script
   :hook (sh-mode . flymake-mode))
 (use-package shfmt
+  :load-path "~/.emacs.d/local-list/emacs-shfmt"
   :hook
   (sh-mode . shfmt-on-save-mode))
 
@@ -282,11 +276,13 @@ consult-ripgrep consult-git-grep consult-grep
 
 ;; Config for python
 (use-package python-mode
+  :load-path "~/.emacs.d/local-list/python-mode"
   :ensure t
   :hook
   (python-mode . lsp-deferred))
 
 (use-package lsp-pyright
+  :load-path "~/.emacs.d/local-list/lsp-pyright"
   :ensure t
   :hook
   (python-mode .
@@ -296,8 +292,10 @@ consult-ripgrep consult-git-grep consult-grep
 
 ;; Json without braces
 
-(use-package yaml-mode)
-(use-package highlight-indentation)
+(use-package yaml-mode
+  :load-path "~/.emacs.d/local-list/yaml-mode")
+(use-package highlight-indentation
+  :load-path "~/.emacs.d/local-list/highlight-indent-guides")
 
 (add-hook 'yaml-mode-hook
 	  (lambda ()
@@ -312,6 +310,7 @@ consult-ripgrep consult-git-grep consult-grep
 
 ;; Let's do some crabby things
 (use-package rustic
+:load-path "~/.emacs.d/local-list/rustic"
   :ensure t
   :config
   (setq rustic-format-on-save nil)
