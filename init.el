@@ -33,15 +33,28 @@
 (require 'use-package)
 (setq use-package-always-ensure t)
 
-
+(use-package compat
+  :load-path "~/.emacs.d/local-lisp/compat")
 ;; here goes packages
+
+(use-package vertico
+  :load-path "~/.emacs.d/local-lisp/vertico"
+  :init
+  (vertico-mode))
+
+
+;; Add a performant terminal
+(use-package vterm
+  :load-path "~/.emacs.d/local-lisp/emacs-libvterm")
+
+
 (use-package all-the-icons
-  :load-path "~/.emacs.d/local-list/all-the-icons/"
+  :load-path "~/.emacs.d/local-lisp/all-the-icons/"
       :if
 (display-graphic-p))
 
 (use-package all-the-icons-dired
-  :load-path "~/.emacs.d/local-list/all-the-icons-dired/"
+  :load-path "~/.emacs.d/local-lisp/all-the-icons-dired/"
       :after all-the-icons
       :hook
 (dired-mode . all-the-icons-dired-mode))
@@ -49,7 +62,7 @@
 ;; let's add some meow to Emacs
 
 (use-package catppuccin-theme
-  :load-path "~/.emacs.d/local-list/catppuccin-theme/"
+  :load-path "~/.emacs.d/local-lisp/catppuccin-theme/"
   :init
   (load-theme 'catppuccin :no-confirm)
   :config
@@ -59,56 +72,50 @@
 ;; And some cool modeline !
 
 (use-package telephone-line
-  :load-path "~/.emacs.d/local-list/telephone-line"
+  :load-path "~/.emacs.d/local-lisp/telephone-line"
   :init
   (telephone-line-mode 1))
 
 (use-package general
-  :load-path "~/.emacs.d/local-list/general")
+  :load-path "~/.emacs.d/local-lisp/general")
+
+(use-package helix
+  :load-path "~/.emacs.d/local-lisp/helix-mode"
+  :hook ((helix-normal-mode . (lambda () (setq display-line-numbers 'relative)))
+         (helix-insert-mode . (lambda () (setq display-line-numbers t))))
+  :config
+  (helix-mode))
 
 (use-package marginalia
-  :load-path "~/.emacs.d/local-list/marginalia"
-        :general
-(:keymaps 'minibuffer-local-map
-         "M-A" 'marginalia-cycle)
-:custom
-(marginalia-max-relative-age 0)
-(marginalia-align 'right)
-:init
-(marginalia-mode)
-:config
-(all-the-icons-completion-marginalia-setup))
+  :load-path "/home/gyfm3853/.emacs.d/local-lisp/marginalia"
+  :bind (:map minibuffer-local-map
+	      ("M-A" . marginalia-cycle))
+  :custom
+  (marginalia-max-relative-age 0)
+  (marginalia-align 'right)
+  :init
+  (marginalia-mode))
 
 (use-package all-the-icons-completion
   :load-path "~/.emacs.d/local-list/all-the-icons-completion"
   :after
-  (marginalia all-the-icons))
-
-(use-package vertico
-  :load-path "~/.emacs.d/local-list/vertico"
-  :config
-(vertico-reverse-mode)
-:init
-(vertico-mode))
-
+  (marginalia all-the-icons)
+  :hook
+  (marginalia-mode . all-the-icons-completion-marginalia-setup))
 
 (use-package corfu
-  :load-path "~/.emacs.d/local-list/corfu"
+  :load-path "~/.emacs.d/local-lisp/corfu"
   :custom
   (corfu-auto t)
   (corfu-auto-delay 0)
   (corfu-separator ?\s)
   (corfu-popupinfo-delay 0)
-  :init
-  (global-corfu-mode)
-  (corfu-popupinfo-mode)
   :general
   (:keymaps 'corfu-map
             "SPC" 'corfu-insert-separator))
 
-
 (use-package consult
-  :load-path "~/.emacs.d/local-list/consult"
+  :load-path "~/.emacs.d/local-lisp/consult"
     :hook
 (completion-list-mode . consult-preview-at-point-mode)
 :init
@@ -122,7 +129,7 @@
      consult-theme :preview-key
 '(:debounce 0.2 any)
 consult-ripgrep consult-git-grep consult-grep
-     consult-bookmark consult-recent-file consult-xref
+     consult-bookmark consult-recent-file
      consult--source-bookmark consult--source-file-register
      consult--source-recent-file consult--source-project-recent-file
      :preview-key
@@ -132,9 +139,8 @@ consult-ripgrep consult-git-grep consult-grep
 ("M-y" #'consult-yank-from-kill-ring)
 ("C-x b" #'consult-buffer))
 
-
 (use-package kind-icon
-  :load-path "~/.emacs.d/local-list/kind-icon"
+  :load-path "~/.emacs.d/local-lisp/kind-icon"
   :ensure t
   :after corfu
   :custom
@@ -149,7 +155,7 @@ consult-ripgrep consult-git-grep consult-grep
 :diminish which-key-mode)
 
 (use-package orderless
-  :load-path "~/.emacs.d/local-list/orderless"
+  :load-path "~/.emacs.d/local-lisp/orderless"
   :init
   (setq completion-styles
 	'(orderless partial-completion basic)
@@ -158,12 +164,9 @@ consult-ripgrep consult-git-grep consult-grep
 
 ;; Some eshell stuff
 
-(use-package eshell-git-prompt
-  :load-path "~/.emacs.d/local-list/eshell-git-prompt")
 (use-package eshell
-  :load-path "~/.emacs.d/local-list/eshell"
+  :load-path "~/.emacs.d/local-lisp/eshell"
   :config
-  (eshell-git-prompt-use-theme 'multiline2)
   (setq eshell-history-size         10000
 	eshell-buffer-maximum-lines 10000
 	eshell-hist-ignoredups t
@@ -180,16 +183,14 @@ consult-ripgrep consult-git-grep consult-grep
 
 ;; Setting up GIT with a bit of magic
 (use-package magit) ;; <== MAGIC BE HERE !!!
-(use-package forge
-  :load-path "~/.emacs.d/local-list/forge"
-  :after magit)
+
 
 ;; Some useful editor config
 (column-number-mode)
 (global-display-line-numbers-mode t)
 
 (use-package rainbow-delimiters ;; it's for shit & giggles. Absolutely not to save my eyes some pain, I swear !
-  :load-path "~/.emacs.d/local-list/rainbow-delimiter"
+  :load-path "~/.emacs.d/local-lisp/rainbow-delimiter"
   :hook
   (prog-mode . rainbow-delimiters-mode))
 
@@ -198,12 +199,10 @@ consult-ripgrep consult-git-grep consult-grep
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package org-roam
-  :load-path "~/.emacs.d/local-list/org-roam"
+  :load-path "~/.emacs.d/local-lisp/org-roam"
   :init
   (setq org-roam-directory (file-truename "~/.emacs.d/org"))
   (org-roam-db-autosync-mode))
-
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -211,13 +210,10 @@ consult-ripgrep consult-git-grep consult-grep
 ;; Where we transform emacs as editor into a super duper powerful IDE ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package direnv
-        :config
-(direnv-mode))
 
 ;; this is where we jury rig lsp with orderless, corfu, which-key and direnv 
 (use-package lsp-mode
-  :load-path "~/.emacs.d/local-list/lsp-mode"
+  :load-path "~/.emacs.d/local-lisp/lsp-mode"
   :custom
   (lsp-completion-provider :none)
   :init
@@ -244,22 +240,20 @@ consult-ripgrep consult-git-grep consult-grep
               lsp-command-map))
 
 
-
-
 (use-package lsp-ui
-  :load-path "~/.emacs.d/local-list/lsp-ui"
+  :load-path "~/.emacs.d/local-lisp/lsp-ui"
   :hook
   (lsp-mode . lsp-ui-mode))
   
 ;; This is the power of the outer gods at your fingertips
 (use-package yasnippet
-  :load-path "~/.emacs.d/local-list/yasnippet"
+  :load-path "~/.emacs.d/local-lisp/yasnippet"
   :ensure t
   :hook ((lsp-mode . yas-minor-mode)))
 
 ;; And this is the outer gods 
 (use-package yasnippet-snippets
-  :load-path "~/.emacs.d/local-list/yasnippet-snippets")
+  :load-path "~/.emacs.d/local-lisp/yasnippet-snippets")
 
 (electric-pair-mode t)
 
@@ -268,34 +262,18 @@ consult-ripgrep consult-git-grep consult-grep
 (use-package sh-script
   :hook (sh-mode . flymake-mode))
 (use-package shfmt
-  :load-path "~/.emacs.d/local-list/emacs-shfmt"
+  :load-path "~/.emacs.d/local-lisp/emacs-shfmt"
   :hook
   (sh-mode . shfmt-on-save-mode))
 
-;; Snake incoming !
 
-;; Config for python
-(use-package python-mode
-  :load-path "~/.emacs.d/local-list/python-mode"
-  :ensure t
-  :hook
-  (python-mode . lsp-deferred))
-
-(use-package lsp-pyright
-  :load-path "~/.emacs.d/local-list/lsp-pyright"
-  :ensure t
-  :hook
-  (python-mode .
-	       (lambda ()
-		 (require 'lsp-pyright)
-		 (lsp-deferred))))
 
 ;; Json without braces
 
 (use-package yaml-mode
-  :load-path "~/.emacs.d/local-list/yaml-mode")
+  :load-path "~/.emacs.d/local-lisp/yaml-mode")
 (use-package highlight-indentation
-  :load-path "~/.emacs.d/local-list/highlight-indent-guides")
+  :load-path "~/.emacs.d/local-lisp/highlight-indent-guides")
 
 (add-hook 'yaml-mode-hook
 	  (lambda ()
@@ -308,16 +286,6 @@ consult-ripgrep consult-git-grep consult-grep
     (face-remap-add-relative 'font-lock-variable-name-face
                              (list :foreground (catppuccin-get-color 'blue)))))
 
-;; Let's do some crabby things
-(use-package rustic
-:load-path "~/.emacs.d/local-list/rustic"
-  :ensure t
-  :config
-  (setq rustic-format-on-save nil)
-  :custom
-  (rustic-cargo-use-last-stored-arguments t))
-
-
 
 ;; Some keybinds under my own prefix to go faaaaasst
 (defvar-keymap quick-map)
@@ -327,3 +295,16 @@ consult-ripgrep consult-git-grep consult-grep
   "f" 'consult-fd
   "g" 'consult-ripgrep
   "SPC" 'org-roam-capture)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages '(yasnippet magit which-key kind-icon)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
