@@ -39,7 +39,7 @@
 
 (use-package vertico
   :load-path "~/.emacs.d/local-lisp/vertico"
-  :init
+  :config
   (vertico-mode))
 
 
@@ -63,9 +63,8 @@
 
 (use-package catppuccin-theme
   :load-path "~/.emacs.d/local-lisp/catppuccin-theme/"
-  :init
-  (load-theme 'catppuccin :no-confirm)
   :config
+  (load-theme 'catppuccin :no-confirm)
   (setq catppuccin-flavor 'macchiato)
   (catppuccin-reload))
 
@@ -73,18 +72,18 @@
 
 (use-package telephone-line
   :load-path "~/.emacs.d/local-lisp/telephone-line"
-  :init
+  :config
   (telephone-line-mode 1))
 
 (use-package general
   :load-path "~/.emacs.d/local-lisp/general")
 
-(use-package helix
-  :load-path "~/.emacs.d/local-lisp/helix-mode"
-  :hook ((helix-normal-mode . (lambda () (setq display-line-numbers 'relative)))
-         (helix-insert-mode . (lambda () (setq display-line-numbers t))))
-  :config
-  (helix-mode))
+;(use-package helix
+; :load-path "~/.emacs.d/local-lisp/helix-mode"
+; :hook ((helix-normal-mode . (lambda () (setq display-line-numbers 'relative)))
+;        (helix-insert-mode . (lambda () (setq display-line-numbers t))))
+; :config
+; (helix-mode))
 
 (use-package marginalia
   :load-path "/home/gyfm3853/.emacs.d/local-lisp/marginalia"
@@ -93,7 +92,7 @@
   :custom
   (marginalia-max-relative-age 0)
   (marginalia-align 'right)
-  :init
+  :config
   (marginalia-mode))
 
 (use-package all-the-icons-completion
@@ -272,13 +271,14 @@ consult-ripgrep consult-git-grep consult-grep
 
 (use-package yaml-mode
   :load-path "~/.emacs.d/local-lisp/yaml-mode")
-(use-package highlight-indentation
-  :load-path "~/.emacs.d/local-lisp/highlight-indent-guides")
-
-(add-hook 'yaml-mode-hook
+(use-package highlight-indent-guides
+  :load-path "~/.emacs.d/local-lisp/highlight-indent-guides"
+  :config
+  (add-hook 'yaml-mode-hook
 	  (lambda ()
 	    (define-key yaml-mode-map "\C-m" 'newline-and-indent)
-	    (highlight-indentation-mode)))
+	    (highlight-indentation-mode))))
+
 
 ;; Ensure syntax coloration for yaml
 (add-hook 'yaml-mode-hook
