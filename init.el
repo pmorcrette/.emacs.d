@@ -196,12 +196,12 @@ consult-ripgrep consult-git-grep consult-grep
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Here be knowledge ! ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package org-roam
-  :load-path "~/.emacs.d/local-lisp/org-roam"
-  :init
-  (setq org-roam-directory (file-truename "~/.emacs.d/org"))
-  (org-roam-db-autosync-mode))
+;;Org-roam is disabled temporarily because it needs some dependency for a fully local setup
+;(use-package org-roam
+;  :load-path "~/.emacs.d/local-lisp/org-roam"
+;  :config
+;  (setq org-roam-directory (file-truename "~/.emacs.d/org"))
+;  (org-roam-db-autosync-mode))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
